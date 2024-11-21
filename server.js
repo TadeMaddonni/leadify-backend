@@ -10,13 +10,17 @@ const port = process.env.PORT || 5000;
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
+module.exports = supabase;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 const leadRoutes = require('./routes/leads');
-app.use('/api/leads', leadRoutes);
+const chatRoutes = require('./routes/chat');
 
+app.use('/api/leads', leadRoutes);
+app.use('/api/chat', chatRoutes);
 
 // Endpoint de prueba para verificar la conexión con Supabase
 app.get('/api/test', async (req, res) => {

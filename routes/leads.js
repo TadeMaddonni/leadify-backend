@@ -2,9 +2,8 @@ const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 
 const router = express.Router();
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+const supabase = require('../server.js');
 
 // Crear un nuevo lead
 router.post('/', async (req, res) => {
